@@ -4,7 +4,7 @@ import InfoPoke from "./InfoPoke";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-
+import "./Main.css";
 const Main=()=>{
     const [pokeData,setPokeData]=useState([]);
     const [loading,setLoading]=useState(true);
@@ -38,7 +38,19 @@ const Main=()=>{
     },[url])
     return(
         <>
+        
             <div className="container">
+            <header>
+        <h1 className="titre">Welcome to My POKEDEX</h1>
+        <img src="" alt="" />
+        <div className="topnav">
+        <a class="active" href="#home">
+          Home
+        </a>
+       
+        <input type="text" placeholder="Search.." />
+      </div>
+      </header>   
                 <div className="left-content">
                     <Carte pokemon={pokeData} loading={loading} infoPokemon={poke=>setPokeDex(poke)}/>
                     

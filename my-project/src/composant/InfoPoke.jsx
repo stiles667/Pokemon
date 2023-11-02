@@ -1,8 +1,5 @@
 import React from "react";
 
-
-    
-
     const InfoPoke = ({ data }) => {
        
         return (

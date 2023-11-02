@@ -32,16 +32,17 @@ const Main = () => {
   };
 
   // Fonction pour récupérer les données des Pokémon individuellement
-  
+
   const getPokemon = async (res) => {
-    const allPokemonData = await Promise.all(res.map(async (item) => {
+    const allPokemonData = await Promise.all(
+      res.map(async (item) => {
         const result = await axios.get(item.url);
         return result.data;
-    }));
+      })
+    );
 
-    setPokeData(allPokemonData.sort((a, b) => a.id > b.id ? 1 : -1));
-}
-
+    setPokeData(allPokemonData.sort((a, b) => (a.id > b.id ? 1 : -1)));
+  };
 
   // Utiliser useEffect pour appeler pokeFun au chargement initial et lorsqu'une nouvelle URL est définie
   useEffect(() => {
@@ -51,7 +52,9 @@ const Main = () => {
   // Fonction pour effectuer une recherche de Pokémon par nom
   const searchPokemon = async (search) => {
     setLoading(true);
-    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`);
+    const res = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`
+    );
     setPokeData([res.data]);
     setLoading(false);
   };
@@ -66,34 +69,42 @@ const Main = () => {
   return (
     <>
       <div className="container">
-      <div className="topnav">
-            <a className="active" href="#home">
-              Home
-            </a>
-            <input
-              type="text"
-              placeholder="Search.."
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
+        <div className="topnav">
+          <a className="active" href="#home">
+            Home
+          </a>
+          <input
+            type="text"
+            placeholder="Search.."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            
+            //  
+
+
+          />
+          <button onClick={handleSearch}>Search</button>
+        </div>
+        <div className="content">
+          <div className="left-content">
+            <Carte
+              pokemon={pokeData}
+              loading={loading}
+              infoPokemon={(poke) => setPokeDex(poke)}
             />
-            <button onClick={handleSearch}>Search</button>
-          </div>
-          <div className="content">
-                <div className="left-content">
-                    <Carte pokemon={pokeData} loading={loading} infoPokemon={(poke) => setPokeDex(poke)} />
-                    <div className="btn-group">
-                        {prevUrl && <button onClick={() => setUrl(prevUrl)}>Previous</button>}
-                        {nextUrl && <button onClick={() => setUrl(nextUrl)}>Next</button>}
-                    </div>
-                </div>
-                <div className="right-content">
-                    <InfoPoke data={pokeDex} />
-                </div>
+            <div className="btn-group">
+              {prevUrl && (
+                <button onClick={() => setUrl(prevUrl)}>Previous</button>
+              )}
+              {nextUrl && <button onClick={() => setUrl(nextUrl)}>Next</button>}
             </div>
-        
+          </div>
+          <div className="right-content">
+            <InfoPoke data={pokeDex} />
+          </div>
+        </div>
       </div>
     </>
-    
   );
 };
 

@@ -2,76 +2,93 @@ import React from "react";
 import Carte from "./Carte";
 import InfoPoke from "./InfoPoke";
 import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Main.css";
-const Main=()=>{
-    const [pokeData,setPokeData]=useState([]);
-    const [loading,setLoading]=useState(true);
-    const [url,setUrl]=useState("https://pokeapi.co/api/v2/pokemon/")
-    const [nextUrl,setNextUrl]=useState();
-    const [prevUrl,setPrevUrl]=useState();
-    const [pokeDex,setPokeDex]=useState();
 
-    const pokeFun=async()=>{
-        setLoading(true)
-        const res=await axios.get(url);
-        setNextUrl(res.data.next);
-        setPrevUrl(res.data.previous);
-        getPokemon(res.data.results)
-        setLoading(false)
+const Main = () => {
+  // State pour stocker les données des Pokémon
+  const [pokeData, setPokeData] = useState([]);
+  // State pour gérer l'état de chargement
+  const [loading, setLoading] = useState(true);
+  // State pour gérer l'URL de l'API Pokémon
+  const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
+  // State pour gérer l'URL de la page précédente
+  const [prevUrl, setPrevUrl] = useState();
+  // State pour gérer l'URL de la page suivante
+  const [nextUrl, setNextUrl] = useState();
+  // State pour stocker les données du Pokémon sélectionné
+  const [pokeDex, setPokeDex] = useState();
+  // State pour gérer l'input de recherche
+  const [searchInput, setSearchInput] = useState("");
+
+  // Fonction pour récupérer les données des Pokémon
+  const pokeFun = async () => {
+    setLoading(true);
+    const res = await axios.get(url);
+    setNextUrl(res.data.next);
+    setPrevUrl(res.data.previous);
+    getPokemon(res.data.results);
+    setLoading(false);
+  };
+
+  // Fonction pour récupérer les données des Pokémon individuellement
+  const getPokemon = async (res) => {
+    const allPokemonData = await Promise.all(
+      res.map(async (item) => {
+        const result = await axios.get(item.url);
+        return result.data;
+      })
+    );
+
+    setPokeData((state) => {
+      const newState = [...state, ...allPokemonData];
+      newState.sort((a, b) => (a.id > b.id ? 1 : -1));
+      return newState;
+    });
+  };
+
+  // Utiliser useEffect pour appeler pokeFun au chargement initial et lorsqu'une nouvelle URL est définie
+  useEffect(() => {
+    pokeFun();
+  }, [url]);
+
+  // Fonction pour effectuer une recherche de Pokémon par nom
+  const searchPokemon = async (search) => {
+    setLoading(true);
+    const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`);
+    setPokeData([res.data]);
+    setLoading(false);
+  };
+
+  // Fonction pour gérer la recherche de Pokémon lorsqu'on appuie sur le bouton "Search"
+  const handleSearch = () => {
+    if (searchInput.trim() !== "") {
+      searchPokemon(searchInput);
     }
-    const getPokemon = async (res) => {
-        const allPokemonData = await Promise.all(res.map(async (item) => {
-            const result = await axios.get(item.url);
-            return result.data;
-        }));
-    
-        setPokeData(state => {
-            const newState = [...state, ...allPokemonData];
-            newState.sort((a, b) => a.id > b.id ? 1 : -1);
-            return newState;
-        });
-    }
-    useEffect(()=>{
-        pokeFun();
-    },[url])
-    return(
-        <>
-        
-            <div className="container">
-            <header>
-        <h1 className="titre">Welcome to My POKEDEX</h1>
-        <img src="" alt="" />
-        <div className="topnav">
-        <a class="active" href="#home">
-          Home
-        </a>
+  };
+
+  return (
+    <>
+      <div className="container">
+        <header>
+          <h1 className="titre">Welcome to My POKEDEX</h1>
+          <img src="" alt="" />
+         
+        </header>
        
-        <input type="text" placeholder="Search.." />
+        <div className="left-content">
+          <Carte pokemon={pokeData} loading={loading} infoPokemon={(poke) => setPokeDex(poke)} />
+          <div className="btn-group">
+            {prevUrl && <button onClick={() => setUrl(prevUrl)}>Previous</button>}
+            {nextUrl && <button onClick={() => setUrl(nextUrl)}>Next</button>}
+          </div>
+        </div>
+        <div className="right-content">
+          <InfoPoke data={pokeDex} />
+        </div>
       </div>
-      </header>   
-                <div className="left-content">
-                    <Carte pokemon={pokeData} loading={loading} infoPokemon={poke=>setPokeDex(poke)}/>
-                    
-                    <div className="btn-group">
-                        {  prevUrl && <button onClick={()=>{
-                            setPokeData([])
-                           setUrl(prevUrl) 
-                        }}>Previous</button>}
+    </>
+  );
+};
 
-                        { nextUrl && <button onClick={()=>{
-                            setPokeData([])
-                            setUrl(nextUrl)
-                        }}>Next</button>}
-
-                    </div>
-                </div>
-                <div className="right-content">
-                   <InfoPoke data={pokeDex}/>
-                </div>
-            </div>
-        </>
-    )
-}
 export default Main;

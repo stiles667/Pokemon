@@ -11,7 +11,8 @@ header {
     padding: 1rem 2rem;
     background-color: #ffffff;
     box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
-    font-family: "Bebas Neue", sans-serif;  
+    font-family: "Bebas Neue", sans-serif;
+  
   }
 /* Add a black background color to the top navigation bar */
 .topnav {
@@ -67,11 +68,34 @@ header {
   }
 }
 /* put the navbar on the top left */
-.topnav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-}
 
+button {
+  padding: 17px 40px;
+  border-radius: 50px;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all .5s ease;
+ }
+ 
+ button:hover {
+  letter-spacing: 3px;
+  background-color: hsl(261deg 80% 48%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+ }
+ 
+ button:active {
+  letter-spacing: 3px;
+  background-color: hsl(261deg 80% 48%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+ }
+ /* put the nav bar under the header */
+  .topnav {
+  }

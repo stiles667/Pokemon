@@ -1,36 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import './Main.css';
+import React from "react";
+import Carte from "./Carte";
+import InfoPoke from "./InfoPoke";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+const Main=()=>{
+    const [pokeData,setPokeData]=useState([]);
+    const [loading,setLoading]=useState(true);
+    const [url,setUrl]=useState("https://pokeapi.co/api/v2/pokemon/")
+    const [nextUrl,setNextUrl]=useState();
+    const [prevUrl,setPrevUrl]=useState();
+    const [pokeDex,setPokeDex]=useState();
 
-export default function Accueil() {
-
-
+    const pokeFun=async()=>{
+        setLoading(true)
+        const res=await axios.get(url);
+        setNextUrl(res.data.next);
+        setPrevUrl(res.data.previous);
+        getPokemon(res.data.results)
+        setLoading(false)
+    }
+    const getPokemon = async (res) => {
+        const allPokemonData = await Promise.all(res.map(async (item) => {
+            const result = await axios.get(item.url);
+            return result.data;
+        }));
     
-    const [pokemon, setPokemon] = useState([]);
+        setPokeData(state => {
+            const newState = [...state, ...allPokemonData];
+            newState.sort((a, b) => a.id > b.id ? 1 : -1);
+            return newState;
+        });
+    }
+    useEffect(()=>{
+        pokeFun();
+    },[url])
+    return(
+        <>
+            <div className="container">
+                <div className="left-content">
+                    <Carte pokemon={pokeData} loading={loading} infoPokemon={poke=>setPokeDex(poke)}/>
+                    
+                    <div className="btn-group">
+                        {  prevUrl && <button onClick={()=>{
+                            setPokeData([])
+                           setUrl(prevUrl) 
+                        }}>Previous</button>}
 
-    useEffect(() => {
-        fetch('https://pokeapi.co/api/v2/pokemon/4', {
-            method: "GET"
-        })
-        .then(response => response.json())
-        .then(data => setPokemon(data))
-        .catch(error => console.log(error));
-    }, []);
-    console.log(pokemon);
-    return (
-        <div>
-                <header><h1>Welcome to My POKEDEX</h1> 
-                <img src="" alt="" /></header>
-    <div className=' Infos'>
-          <h1> {pokemon.name}</h1>
-            <img src={pokemon.sprites?.front_default} alt={pokemon.name} />
-            <h2> {pokemon.weight}</h2>
-            <h2> {pokemon.height}</h2>
-            <h2> {pokemon.base_experience}</h2>
-            <h2> {pokemon.abilities?.map(ability => ability.ability.name).join(', ')}</h2>
+                        { nextUrl && <button onClick={()=>{
+                            setPokeData([])
+                            setUrl(nextUrl)
+                        }}>Next</button>}
+
+                    </div>
+                </div>
+                <div className="right-content">
+                   <InfoPoke data={pokeDex}/>
+                </div>
             </div>
-
-          
-
-        </div>
+        </>
     )
 }
+export default Main;

@@ -20,6 +20,8 @@ const Main = () => {
   const [pokeDex, setPokeDex] = useState();
   // State pour gérer l'input de recherche
   const [searchInput, setSearchInput] = useState("");
+    // State pour gérer les erreurs
+    const [error, setError] = useState(null);
 
   // Fonction pour récupérer les données des Pokémon
   const pokeFun = async () => {
@@ -57,9 +59,14 @@ const Main = () => {
   };
 
   // Fonction pour gérer la recherche de Pokémon lorsqu'on appuie sur le bouton "Search"
-  const handleSearch = () => {
-    if (searchInput.trim() !== "") {
-      searchPokemon(searchInput);
+  const handleSearch = async () => {
+    try {
+      const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchInput.toLowerCase()}`);
+      setPokeData([res.data]);
+      setError(null); // clear the error message
+    } catch (err) {
+      setError('Pokemon not found');
+      setPokeData([]); // clear the previous data
     }
   };
 

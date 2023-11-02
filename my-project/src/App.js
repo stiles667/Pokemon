@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Link, Route, Routes } from "react-router-dom";
 import Main from './composant/Main';
 import InfoPoke from './composant/InfoPoke';
+import Pokedex from './composant/PokeDex';
 
 function App() {
   return (
@@ -13,6 +14,10 @@ function App() {
      <Main/>
      <InfoPoke/>
      </>
+     {/* <Link to="/Pokedex">PokeDex</Link>
+     <Routes>
+       <Route path="/Pokedex" element={<Pokedex/>}/>
+      </Routes> */}
     </div>
   );
 }

@@ -4,6 +4,9 @@ const InfoPoke = ({ data }) => {
     if (!data) {
         return null;
     }
+    const addToPokedex = () => {
+        localStorage.setItem(data.name, JSON.stringify(data));
+    }
 
     return (
         <div className="info">
@@ -25,6 +28,7 @@ const InfoPoke = ({ data }) => {
                     ))
                 }
             </div>
+            <button onClick={addToPokedex}>Add to Pokedex</button>
         </div>
     );
 }

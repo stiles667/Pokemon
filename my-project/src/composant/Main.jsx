@@ -15,7 +15,7 @@ export default function Accueil() {
     return (
         <div>
           <h1> {pokemon.data.name}</h1>
-          <img src={pokemon.data.} alt="" />
+          <img src={pokemon.data.sprites} alt="" />
 
         </div>
     )

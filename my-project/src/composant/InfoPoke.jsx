@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function InfoPoke() {
+
     
 
     const InfoPoke = ({ data }) => {
@@ -43,5 +43,5 @@ export default function InfoPoke() {
             </>
         )
     }
-}
+    export default InfoPoke
 

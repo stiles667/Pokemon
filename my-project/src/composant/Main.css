@@ -81,6 +81,10 @@ header {
   padding: 20px;
   text-align: center;
 }
+.card :hover {
+  filter: drop-shadow(0 0 0.75rem crimson);  transform: translateY(-5px);
+  transition: 0.3s;
+}
 button {
   padding: 17px 40px;
   border-radius: 50px;

@@ -21,7 +21,7 @@ export default function InfoPoke() {
                                             <h2>{poke.ability.name}</h2>
                                         </div>
                                         </>
-                                    )
+                                    )                                               
                                 })
                             }
                         </div>
@@ -44,4 +44,4 @@ export default function InfoPoke() {
         )
     }
 }
-  
+

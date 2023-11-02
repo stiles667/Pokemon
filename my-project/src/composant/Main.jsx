@@ -66,6 +66,18 @@ const Main = () => {
   return (
     <>
       <div className="container">
+      <div className="topnav">
+            <a className="active" href="#home">
+              Home
+            </a>
+            <input
+              type="text"
+              placeholder="Search.."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+            <button onClick={handleSearch}>Search</button>
+          </div>
         <header>
           <h1 className="titre">Welcome to My POKEDEX</h1>
           <img src="" alt="" />
@@ -82,8 +94,10 @@ const Main = () => {
         <div className="right-content">
           <InfoPoke data={pokeDex} />
         </div>
+        
       </div>
     </>
+    
   );
 };
 

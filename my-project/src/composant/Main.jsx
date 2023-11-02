@@ -78,22 +78,18 @@ const Main = () => {
             />
             <button onClick={handleSearch}>Search</button>
           </div>
-        <header>
-          <h1 className="titre">Welcome to My POKEDEX</h1>
-          <img src="" alt="" />
-         
-        </header>
-       
-        <div className="left-content">
-          <Carte pokemon={pokeData} loading={loading} infoPokemon={(poke) => setPokeDex(poke)} />
-          <div className="btn-group">
-            {prevUrl && <button onClick={() => setUrl(prevUrl)}>Previous</button>}
-            {nextUrl && <button onClick={() => setUrl(nextUrl)}>Next</button>}
-          </div>
-        </div>
-        <div className="right-content">
-          <InfoPoke data={pokeDex} />
-        </div>
+          <div className="content">
+                <div className="left-content">
+                    <Carte pokemon={pokeData} loading={loading} infoPokemon={(poke) => setPokeDex(poke)} />
+                    <div className="btn-group">
+                        {prevUrl && <button onClick={() => setUrl(prevUrl)}>Previous</button>}
+                        {nextUrl && <button onClick={() => setUrl(nextUrl)}>Next</button>}
+                    </div>
+                </div>
+                <div className="right-content">
+                    <InfoPoke data={pokeDex} />
+                </div>
+            </div>
         
       </div>
     </>

@@ -112,5 +112,19 @@ button {
   transform: translateY(10px);
   transition: 100ms;
  }
+
+ .content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-content {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.right-content {
+  flex: 1;
+}
  /* put the nav bar under the header */
   

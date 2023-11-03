@@ -40,7 +40,7 @@ function PokeDex() {
 
   return (
     <div className="container">
-      bienvenue
+      
       <div className="topnav">
         <div className="link-buttons">
           <Link to="/" className="link-button">

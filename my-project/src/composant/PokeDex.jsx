@@ -45,7 +45,7 @@ function PokeDex() {
             Home
           </Link>
           
-        <img  className= "pokess"src="https://o.remove.bg/downloads/1d32a468-8d34-45c3-9252-a7a7a0cbe410/68747470733a2f2f692e696d6775722e636f6d2f415975745a4f462e706e67-removebg-preview.png" alt=""  style={{height:"70px",}}/>
+        <img  className= "pokess"src="https://o.remove.bg/downloads/1d32a468-8d34-45c3-9252-a7a7a0cbe410/68747470733a2f2f692e696d6775722e636f6d2f415975745a4f462e706e67-removebg-preview.png" alt=""  style={{height:"120px",}}/>
       </div>
       <button className="remove-all-button" onClick={removeAllPokemon}>Remove All</button>
       {pokeDex.map((pokemon) => (

@@ -3,18 +3,18 @@
     font-family: "Bebas Neue", sans-serif;
     /* margin: 0;
     padding: 0; */
-    background-color: gray;
+    background-color: rgb(203, 199, 199);
 
 }
 body{
    
-    background-color: gray;
+    background-color: rgb(203, 199, 199);
 }
 
 /* Add a black background color to the top navigation bar */
 .topnav {
   overflow: hidden;
-  background-color: gray;
+  background-color: rgb(203, 199, 199);
   border-radius: 10px;
 
 }
@@ -74,42 +74,35 @@ body{
   gap: 20px;
 }
 
-
-
-/* Container for the Pokemon cards */
 .card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-/* Pokemon card style */
 .card {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
   transition: all 0.4s;
-  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 5px  rgba(0, 0, 0, 0.705);
   width: 200px;
   height: 300px;
   margin: 10px;
   overflow: hidden;
-  background-color: #f7f7f7;
 }
-
-/* Style when hovering over a card */
+/* DÃ©finit le style lors du survol de la souris pour la classe .card */
 .card:hover {
-  filter: drop-shadow(0 0 0.75rem rgb(88, 37, 47));
+  filter: drop-shadow(0 0 0.75rem crimson);  
   transform: translateY(-5px);
   transition: 0.3s;
   border-radius: 15px;
   cursor: pointer;
-  transform: scale(1.1); /* Adjust scale as needed */
-  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
+  transform: scale(0.9);
+  box-shadow: 0px 0px 10px 5px  rgba(0, 0, 0, 0.705);
 }
-
-
 /* Pokemon image style */
 .card img {
   max-width: 100%;
@@ -118,20 +111,16 @@ body{
   border-radius: 5px;
   margin-bottom: 10px;
 }
-
 /* Add to Pokedex button style */
 .card button {
-  background-color: #4CAF50;
-  color: white;
+  background-color: rgb(246, 241, 240);
+ 
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 14px;
 }
-
-
-
 
 button {
   padding: 17px 40px;

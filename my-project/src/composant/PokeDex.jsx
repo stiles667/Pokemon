@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./PokeDex.css";
+import "./Main.css";
 
 // Define the PokeDex component
 function PokeDex() {
@@ -72,7 +72,7 @@ function PokeDex() {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
-          <button onClick={handleSearch}>Search</button>
+          <button className="earchButton" onClick={handleSearch}>Search</button>
         </div>
       </div>
       {pokeDex.map((pokemon) => (

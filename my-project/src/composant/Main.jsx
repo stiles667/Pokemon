@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import React from "react";
 import Carte from "./Carte";
 import InfoPoke from "./InfoPoke";
@@ -5,8 +6,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import "./Main.css";
 import { Link } from "react-router-dom";
-
+// Define the Main component
 const Main = () => {
+  // Define state variables
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
@@ -14,8 +16,8 @@ const Main = () => {
   const [nextUrl, setNextUrl] = useState();
   const [pokeDex, setPokeDex] = useState();
   const [searchInput, setSearchInput] = useState("");
-  const [error, setError] = useState(null);
-
+  const [setError] = useState(null);
+  // Define function to fetch Pokemon data
   const pokeFun = async () => {
     setLoading(true);
     const res = await axios.get(url);
@@ -24,7 +26,7 @@ const Main = () => {
     getPokemon(res.data.results);
     setLoading(false);
   };
-
+  // Define function to get individual Pokemon data
   const getPokemon = async (res) => {
     const allPokemonData = await Promise.all(
       res.map(async (item) => {
@@ -35,13 +37,13 @@ const Main = () => {
 
     setPokeData(allPokemonData.sort((a, b) => (a.id > b.id ? 1 : -1)));
   };
-
+  // Use useEffect to call pokeFun when the component mounts
   useEffect(() => {
     pokeFun();
   }, [url]);
-
+  // Define function to handle search
   const handleSearch = async () => {
-    if (searchInput.trim() === '') {
+    if (searchInput.trim() === "") {
       setPokeData([]);
       setError(null);
     } else {
@@ -57,7 +59,7 @@ const Main = () => {
       }
     }
   };
-
+  // Return the JSX to render
   return (
     <>
       <div className="container">

@@ -1,52 +1,54 @@
+// Import necessary libraries and components
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
- 
- 
+
+// Define the PokeDex component
 function PokeDex() {
+  // Define state variables
   const [pokeDex, setPokeDex] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [pokeData, setPokeData] = useState([]);
-  const [error, setError] = useState(null);
- 
+
+  // Use useEffect to load Pokemon data from localStorage when the component mounts
   useEffect(() => {
     const keys = Object.keys(localStorage);
-    let pokemons = keys.map(key => {
-      let item = localStorage.getItem(key);
-      try {
-        return JSON.parse(item);
-      } catch (err) {
-      }
-    }).filter(Boolean); // filter out any undefined values
+    let pokemons = keys
+      .map((key) => {
+        let item = localStorage.getItem(key);
+        try {
+          return JSON.parse(item);
+        } catch (err) {}
+      })
+      .filter(Boolean); // filter out any undefined values
     setPokeDex(pokemons);
   }, []);
- 
+
+  // Define function to handle search
   const handleSearch = async () => {
     try {
       const res = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${searchInput.toLowerCase()}`
       );
-      setPokeData([res.data]);
-      setError(null); // clear the error message
+      console.log(res.data); // use the response data
     } catch (err) {
-      setError("Pokemon not found");
-      setPokeData([]); // clear the previous data
+      console.error(err); // handle the error
     }
   };
- 
+
+  // Define function to remove a Pokemon from the Pokedex
   const removePokemon = (id) => {
     localStorage.removeItem(id);
     setPokeDex(pokeDex.filter((pokemon) => pokemon.id !== id));
   };
- 
+
+  // Define function to remove all Pokemon from the Pokedex
   const removeAllPokemon = () => {
     localStorage.clear();
     setPokeDex([]);
   };
- 
+  // Return the JSX to render
   return (
     <div className="container">
-      
       <div className="topnav">
         <div className="link-buttons">
           <Link to="/" className="link-button">
@@ -77,6 +79,5 @@ function PokeDex() {
     </div>
   );
 }
- 
+// Export the PokeDex component so it can be used in other parts of the application
 export default PokeDex;
- 

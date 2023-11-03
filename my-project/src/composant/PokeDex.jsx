@@ -79,7 +79,7 @@ function PokeDex() {
         <div key={pokemon.id}>
           <h2>{pokemon.name}</h2>
           <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-          <button onClick={() => removePokemon(pokemon.id)}>Remove</button>
+          <button onClick={() => removePokemon(pokemon.id)}>Remove </button>
         </div>
       ))}
       <button onClick={removeAllPokemon}>Remove All</button>

@@ -87,12 +87,15 @@ const Main = () => {
           <div className="link-buttons"></div>
           <div className="search-bar">
             <input
+            // here we add the required attribute
               required=""
               type="text"
               name="text"
               class="input"
               placeholder="Search Pokemon"
+              // here we add the value attribute
               value={searchInput}
+              // here we add the onChange attribute
               onChange={(e) => setSearchInput(e.target.value)}
             />
             

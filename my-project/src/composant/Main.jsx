@@ -4,6 +4,7 @@ import InfoPoke from "./InfoPoke";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import "./Main.css";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   // State pour stocker les données des Pokémon
@@ -20,8 +21,8 @@ const Main = () => {
   const [pokeDex, setPokeDex] = useState();
   // State pour gérer l'input de recherche
   const [searchInput, setSearchInput] = useState("");
-    // State pour gérer les erreurs
-    const [error, setError] = useState(null);
+  // State pour gérer les erreurs
+  const [error, setError] = useState(null);
 
   // Fonction pour récupérer les données des Pokémon
   const pokeFun = async () => {
@@ -64,11 +65,13 @@ const Main = () => {
   // Fonction pour gérer la recherche de Pokémon lorsqu'on appuie sur le bouton "Search"
   const handleSearch = async () => {
     try {
-      const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${searchInput.toLowerCase()}`);
+      const res = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${searchInput.toLowerCase()}`
+      );
       setPokeData([res.data]);
       setError(null); // clear the error message
     } catch (err) {
-      setError('Pokemon not found');
+      setError("Pokemon not found");
       setPokeData([]); // clear the previous data
     }
   };
@@ -76,40 +79,31 @@ const Main = () => {
   return (
     <>
       <div className="container">
-        <div className="topnav">
-          <a className="active" href="#home">
-            Home
-          </a>
-          <input
-            type="text"
-            placeholder="Search.."
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            
-            //  
-
-
-          />
-          <button onClick={handleSearch}>Search</button>
-        </div>
-        <div className="content">
-          <div className="left-content">
-            <Carte
-              pokemon={pokeData}
-              loading={loading}
-              infoPokemon={(poke) => setPokeDex(poke)}
+      <div className="topnav">
+            <a className="active" href="#home">
+              Home
+            </a>
+            <input
+              type="text"
+              placeholder="Search.."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
-            <div className="btn-group">
-              {prevUrl && (
-                <button onClick={() => setUrl(prevUrl)}>Previous</button>
-              )}
-              {nextUrl && <button onClick={() => setUrl(nextUrl)}>Next</button>}
+            <button onClick={handleSearch}>Search</button>
+          </div>
+          <div className="content">
+                <div className="left-content">
+                    <Carte pokemon={pokeData} loading={loading} infoPokemon={(poke) => setPokeDex(poke)} />
+                    <div className="btn-group">
+                        {prevUrl && <button onClick={() => setUrl(prevUrl)}>Previous</button>}
+                        {nextUrl && <button onClick={() => setUrl(nextUrl)}>Next</button>}
+                    </div>
+                </div>
+                <div className="right-content">
+                    <InfoPoke data={pokeDex} />
+                </div>
             </div>
-          </div>
-          <div className="right-content">
-            <InfoPoke data={pokeDex} />
-          </div>
-        </div>
+        
       </div>
     </>
   );

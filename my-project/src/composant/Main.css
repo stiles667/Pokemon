@@ -13,12 +13,13 @@ body{
 
 /* Add a black background color to the top navigation bar */
 .topnav {
-  background-color: rgb(203, 199, 199);
+  background-color: rgb(90, 86, 86);
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 0px 10px 5px  rgba(33, 33, 33, 0.705);
+  margin-bottom: 20px;
 
 }
 
@@ -250,3 +251,41 @@ input {
 
 
 }
+.remove-all-button {
+  position: absolute;
+  top: 130px; /* Adjust this value based on the height topnav  */
+  right: 10px;
+}
+.Links{
+  background-color:rgb(90, 86, 86) ;
+}
+.search-bar{
+  background-color: rgb(90, 86, 86);
+}
+.image{
+  background-color: rgb(90, 86, 86);
+}
+.liknw{
+  background-color: rgb(90, 86, 86);
+}
+.homeB{
+  background-color: rgb(90, 86, 86);
+}
+.homeB{  padding: 15px 25px;
+  border: unset;
+  border-radius: 15px;
+  color: #212121;
+  z-index: 1;
+  background: #e8e8e8;
+  position: relative;
+  font-weight: 1000;
+  font-size: 17px;
+  /* -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27); */
+  transition: all 250ms;
+  overflow: hidden;
+  text-decoration: none; /* Remove underline from link */
+  display: inline-block; /* Allow padding to affect the link */}
+  .pokess{
+    background-color: rgb(90, 86, 86);
+  }

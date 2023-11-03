@@ -79,8 +79,8 @@ const Main = () => {
             <Link to="/Pokedex" className="link-button">
               Pokedex
             </Link>
-            </div>
-         <img src="https://o.remove.bg/downloads/c599fbf4-9a22-494e-864e-2039c0f23ebd/Symbole-Pokemon-removebg-preview.png" alt=""  style={{height:"120px",}}/>
+            </div>  
+         <img  className="image"src="https://o.remove.bg/downloads/c599fbf4-9a22-494e-864e-2039c0f23ebd/Symbole-Pokemon-removebg-preview.png" alt=""  style={{height:"120px",}}/>
           <div className="link-buttons">
           </div>
           <div className="search-bar">

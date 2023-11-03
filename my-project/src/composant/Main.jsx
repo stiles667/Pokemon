@@ -79,16 +79,10 @@ const Main = () => {
   return (
     <>
       <div className="container">
-        <div className="topnav">
-          <div className="link-buttons">
-            <Link to="/" className="link-button">
+      <div className="topnav">
+            <a className="active" href="#home">
               Home
-            </Link>
-            <Link to="/Pokedex" className="link-button">
-              Pokedex
-            </Link>
-          </div>
-          <div className="search-bar">
+            </a>
             <input
               type="text"
               placeholder="Search.."
@@ -97,25 +91,19 @@ const Main = () => {
             />
             <button onClick={handleSearch}>Search</button>
           </div>
-        </div>
-        <div className="content">
-          <div className="left-content">
-            <Carte
-              pokemon={pokeData}
-              loading={loading}
-              infoPokemon={(poke) => setPokeDex(poke)}
-            />
-            <div className="btn-group">
-              {prevUrl && (
-                <button onClick={() => setUrl(prevUrl)}>Previous</button>
-              )}
-              {nextUrl && <button onClick={() => setUrl(nextUrl)}>Next</button>}
+          <div className="content">
+                <div className="left-content">
+                    <Carte pokemon={pokeData} loading={loading} infoPokemon={(poke) => setPokeDex(poke)} />
+                    <div className="btn-group">
+                        {prevUrl && <button onClick={() => setUrl(prevUrl)}>Previous</button>}
+                        {nextUrl && <button onClick={() => setUrl(nextUrl)}>Next</button>}
+                    </div>
+                </div>
+                <div className="right-content">
+                    <InfoPoke data={pokeDex} />
+                </div>
             </div>
-          </div>
-          <div className="right-content">
-            <InfoPoke data={pokeDex} />
-          </div>
-        </div>
+        
       </div>
     </>
   );

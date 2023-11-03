@@ -1,18 +1,21 @@
-// Import React library
-import React from "react";
+import React, { useState } from "react";
+import "./Carte.css"; // import the CSS file
 
 // Define the Carte component
 const Carte = ({ pokemon, infoPokemon }) => {
-  // Define function to add a Pokemon to the Pokedex
+  const [message, setMessage] = useState("");
+
   const addToPokedex = (poke) => {
     localStorage.setItem(poke.name, JSON.stringify(poke));
+    setMessage(`You have successfully added ${poke.name} to your Pokedex!`);
+    setTimeout(() => setMessage(""), 3000); 
   };
 
   // Return the JSX to render
   return (
     // Create a container for the Pokemon cards
     <>
-      {/* Map over the pokemon array and create a card for each Pokemon */}
+      {message && <div className="message">{message}</div>}
       {pokemon.map((item) => {
         return (
           // Create a card for the Pokemon

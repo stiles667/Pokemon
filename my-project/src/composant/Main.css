@@ -250,3 +250,8 @@ input {
 
 
 }
+.remove-all-button {
+  position: absolute;
+  top: 130px; /* Adjust this value based on the height of your topnav */
+  right: 10px;
+}

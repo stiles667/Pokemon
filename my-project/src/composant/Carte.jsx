@@ -8,7 +8,7 @@ const Carte = ({ pokemon, infoPokemon }) => {
   const addToPokedex = (poke) => {
     localStorage.setItem(poke.name, JSON.stringify(poke));
     setMessage(`You have successfully added ${poke.name} to your Pokedex!`);
-    setTimeout(() => setMessage(""), 3000); 
+    setTimeout(() => setMessage(""), 3000);
   };
 
   // Return the JSX to render
@@ -17,13 +17,18 @@ const Carte = ({ pokemon, infoPokemon }) => {
     <>
       {message && <div className="message">{message}</div>}
       {pokemon.map((item) => {
+        
         return (
           // Create a card for the Pokemon
           <div className="card" key={item.id} onClick={() => infoPokemon(item)}>
             {/* Display the Pokemon's ID */}
             <h2>{item.id}</h2>
             {/* Display the Pokemon's image */}
-            <img src={item.sprites.front_default} alt="" />
+            <img
+              src={item.sprites.other.dream_world.front_default}
+              alt=""
+              style={{ width: "110px", height: "110px" }}
+            />
             {/* Display the Pokemon's name */}
             <h2>{item.name}</h2>
             {/* Add a button to add the Pokemon to the Pokedex */}

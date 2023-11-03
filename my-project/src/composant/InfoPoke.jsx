@@ -16,7 +16,7 @@ const InfoPoke = ({ data }) => {
       <h1>{data.name}</h1>
       {/* Display the Pokemon's image */}
       <img
-        src={data.sprites.front_default}
+        src={data.sprites.other.dream_world.front_default}
         alt={data.name}
         style={{ width: "170px", height: "170px" }}
       />
@@ -27,6 +27,12 @@ const InfoPoke = ({ data }) => {
             <h2>{ability.ability.name}</h2>
           </div>
         ))}
+      </div>
+      {/* Display the Pokemon's types */}
+      <div className="types">
+        <h2>Type: {data.types.map((type, index) => (
+          <span key={index}>{type.type.name} </span>
+        ))}</h2>
       </div>
       {/* Display the Pokemon's base stats */}
       <div className="base-stat">

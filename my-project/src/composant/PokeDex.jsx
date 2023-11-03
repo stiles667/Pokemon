@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "./PokeDex.css";
 
 // Define the PokeDex component
 function PokeDex() {
@@ -48,8 +49,14 @@ function PokeDex() {
   };
   // Return the JSX to render
   return (
+    // create the same header like in the Main.jsx
+    
+    
+
     <div className="container">
+      <header> </header>
       <div className="topnav">
+      <h1> <img src="https://o.remove.bg/downloads/1d32a468-8d34-45c3-9252-a7a7a0cbe410/68747470733a2f2f692e696d6775722e636f6d2f415975745a4f462e706e67-removebg-preview.png" alt=""  style={{height:"70px",}}/></h1>
         <div className="link-buttons">
           <Link to="/" className="link-button">
             Home

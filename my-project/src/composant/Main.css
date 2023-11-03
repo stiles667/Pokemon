@@ -13,12 +13,13 @@ body{
 
 /* Add a black background color to the top navigation bar */
 .topnav {
-  background-color: rgb(203, 199, 199);
+  background-color: rgb(90, 86, 86);
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 0px 10px 5px  rgba(33, 33, 33, 0.705);
+  margin-bottom: 20px;
 
 }
 
@@ -252,6 +253,6 @@ input {
 }
 .remove-all-button {
   position: absolute;
-  top: 130px; /* Adjust this value based on the height of your topnav */
+  top: 130px; /* Adjust this value based on the height topnav  */
   right: 10px;
 }

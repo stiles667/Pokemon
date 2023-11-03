@@ -10,13 +10,12 @@ function App() {
   return (
     <div className="App">
      <>
-     <Main/>
-     <InfoPoke/>
-     </>
-     {/* <Link to="/Pokedex">PokeDex</Link>
      <Routes>
-       <Route path="/Pokedex" element={<Pokedex/>}/>
-      </Routes> */}
+        <Route path="/" element={<Main />} />
+        <Route path="/Pokedex" element={<Pokedex />} />
+      </Routes>
+     </>
+      
     </div>
   );
 }

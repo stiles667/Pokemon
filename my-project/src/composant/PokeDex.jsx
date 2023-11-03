@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
-
+ 
+ 
 function PokeDex() {
   const [pokeDex, setPokeDex] = useState([]);
-  const [searchInput, setSearchInput] = useState(""); 
-  const [pokeData, setPokeData] = useState([]); 
-  const [error, setError] = useState(null); 
-
+  const [searchInput, setSearchInput] = useState("");
+  const [pokeData, setPokeData] = useState([]);
+  const [error, setError] = useState(null);
+ 
   useEffect(() => {
     const keys = Object.keys(localStorage);
     let pokemons = keys.map((key) => JSON.parse(localStorage.getItem(key)));
     setPokeDex(pokemons);
   }, []);
-
+ 
   const handleSearch = async () => {
     try {
       const res = await axios.get(
@@ -27,17 +27,17 @@ function PokeDex() {
       setPokeData([]); // clear the previous data
     }
   };
-
+ 
   const removePokemon = (id) => {
     localStorage.removeItem(id);
     setPokeDex(pokeDex.filter((pokemon) => pokemon.id !== id));
   };
-
+ 
   const removeAllPokemon = () => {
     localStorage.clear();
     setPokeDex([]);
   };
-
+ 
   return (
     <div className="container">
       <div className="topnav">
@@ -70,5 +70,6 @@ function PokeDex() {
     </div>
   );
 }
-
+ 
 export default PokeDex;
+ 

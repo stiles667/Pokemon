@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import React from "react";
 import Carte from "./Carte";
 import InfoPoke from "./InfoPoke";
@@ -5,26 +6,18 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import "./Main.css";
 import { Link } from "react-router-dom";
-
+// Define the Main component
 const Main = () => {
-  // State pour stocker les données des Pokémon
+  // Define state variables
   const [pokeData, setPokeData] = useState([]);
-  // State pour gérer l'état de chargement
   const [loading, setLoading] = useState(true);
-  // State pour gérer l'URL de l'API Pokémon
   const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
-  // State pour gérer l'URL de la page précédente
   const [prevUrl, setPrevUrl] = useState();
-  // State pour gérer l'URL de la page suivante
   const [nextUrl, setNextUrl] = useState();
-  // State pour stocker les données du Pokémon sélectionné
   const [pokeDex, setPokeDex] = useState();
-  // State pour gérer l'input de recherche
   const [searchInput, setSearchInput] = useState("");
-  // State pour gérer les erreurs
-  const [error, setError] = useState(null);
-
-  // Fonction pour récupérer les données des Pokémon
+  const [setError] = useState(null);
+  // Define function to fetch Pokemon data
   const pokeFun = async () => {
     setLoading(true);
     const res = await axios.get(url);
@@ -33,9 +26,7 @@ const Main = () => {
     getPokemon(res.data.results);
     setLoading(false);
   };
-
-  // Fonction pour récupérer les données des Pokémon individuellement
-
+  // Define function to get individual Pokemon data
   const getPokemon = async (res) => {
     const allPokemonData = await Promise.all(
       res.map(async (item) => {
@@ -46,36 +37,29 @@ const Main = () => {
 
     setPokeData(allPokemonData.sort((a, b) => (a.id > b.id ? 1 : -1)));
   };
-
-  // Utiliser useEffect pour appeler pokeFun au chargement initial et lorsqu'une nouvelle URL est définie
+  // Use useEffect to call pokeFun when the component mounts
   useEffect(() => {
     pokeFun();
   }, [url]);
-
-  // Fonction pour effectuer une recherche de Pokémon par nom
-  const searchPokemon = async (search) => {
-    setLoading(true);
-    const res = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`
-    );
-    setPokeData([res.data]);
-    setLoading(false);
-  };
-
-  // Fonction pour gérer la recherche de Pokémon lorsqu'on appuie sur le bouton "Search"
+  // Define function to handle search
   const handleSearch = async () => {
-    try {
-      const res = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${searchInput.toLowerCase()}`
-      );
-      setPokeData([res.data]);
-      setError(null); // clear the error message
-    } catch (err) {
-      setError("Pokemon not found");
-      setPokeData([]); // clear the previous data
+    if (searchInput.trim() === "") {
+      setPokeData([]);
+      setError(null);
+    } else {
+      try {
+        const res = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${searchInput.toLowerCase()}`
+        );
+        setPokeData([res.data]);
+        setError(null);
+      } catch (err) {
+        setError("Pokemon not found");
+        setPokeData([]);
+      }
     }
   };
-
+  // Return the JSX to render
   return (
     <>
       <div className="container">

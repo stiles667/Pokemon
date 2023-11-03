@@ -83,11 +83,11 @@ header {
   transition: all 0.4s;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 5px  rgba(0, 0, 0, 0.705);
-  width: 200px; /* Adjust as needed */
-  height: 300px; /* Adjust as needed */
-  margin: 10px; /* Adjust as needed */
+  width: 200px; 
+  height: 300px; 
+  margin: 10px; 
 }
-
+/* Définit le style lors du survol de la souris pour la classe .card */
 .card:hover {
   filter: drop-shadow(0 0 0.75rem crimson);  
   transform: translateY(-5px);
@@ -180,4 +180,3 @@ button {
   width: 100%;
  }
  
-  

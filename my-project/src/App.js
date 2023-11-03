@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/Pokedex" element={<Pokedex />} />
+        <Route path="/PokeDex" element={<Pokedex />} />
       </Routes>
     </div>
   );

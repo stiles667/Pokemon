@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
-
 function PokeDex() {
   const [pokeDex, setPokeDex] = useState([]);
-  const [searchInput, setSearchInput] = useState(""); 
-  const [pokeData, setPokeData] = useState([]); 
-  const [error, setError] = useState(null); 
+  const [searchInput, setSearchInput] = useState("");
+  // const [pokeData, setPokeData] = useState([]);
+  // const [error, setError] = useState(null);
 
   useEffect(() => {
     const keys = Object.keys(localStorage);
-    let pokemons = keys.map((key) => JSON.parse(localStorage.getItem(key)));
+    let pokemons = keys
+      .map((key) => {
+        let item = localStorage.getItem(key);
+        try {
+          return JSON.parse(item);
+        } catch (err) {}
+      })
+      .filter(Boolean); // filter out any undefined values
     setPokeDex(pokemons);
   }, []);
 
@@ -20,11 +25,11 @@ function PokeDex() {
       const res = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${searchInput.toLowerCase()}`
       );
-      setPokeData([res.data]);
-      setError(null); // clear the error message
+      // setPokeData([res.data]);
+      // setError(null); // clear the error message
     } catch (err) {
-      setError("Pokemon not found");
-      setPokeData([]); // clear the previous data
+      // setError("Pokemon not found");
+      // setPokeData([]); // clear the previous data
     }
   };
 
@@ -40,7 +45,6 @@ function PokeDex() {
 
   return (
     <div className="container">
-      
       <div className="topnav">
         <div className="link-buttons">
           <Link to="/" className="link-button">

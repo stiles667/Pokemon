@@ -4,10 +4,7 @@ const InfoPoke = ({ data }) => {
   if (!data) {
     return null;
   }
-  const addToPokedex = (pokemon) => {
-    const id = Date.now().toString(); // Generate a unique ID
-    localStorage.setItem(id, JSON.stringify({ ...pokemon, id: id }));
-  };
+  
   return (
     <div className="info" style={{ position: "sticky", top: "0" }}>
       <h1>{data.name}</h1>
@@ -30,7 +27,7 @@ const InfoPoke = ({ data }) => {
           </h3>
         ))}
       </div>
-      <button onClick={addToPokedex}>Add to Pokedex</button>
+      
     </div>
   );
 };

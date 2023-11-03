@@ -1,7 +1,7 @@
 // Import necessary libraries and components
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 import "./Main.css";
 
 // Define the PokeDex component
@@ -38,24 +38,36 @@ function PokeDex() {
   // Return the JSX to render
   return (
     <div className="container">
-      <header> </header>
       <div className="topnav">
-      
-          <Link to="/" className="homeB">
-            Home
-          </Link>
-          
-        <img  className= "pokess"src="https://o.remove.bg/downloads/1d32a468-8d34-45c3-9252-a7a7a0cbe410/68747470733a2f2f692e696d6775722e636f6d2f415975745a4f462e706e67-removebg-preview.png" alt=""  style={{height:"120px",}}/>
+        <Link to="/" className="link-button">
+          Home
+        </Link>
+
+        <img
+          className="pokess"
+          src="https://camo.githubusercontent.com/7f1f1e69bef239378a28e8aca7d1d7bd0890d37a7871d01135e2d044da6e2157/68747470733a2f2f692e696d6775722e636f6d2f415975745a4f462e706e67"
+          alt=""
+          style={{ height: "120px" }}
+        />
       </div>
-      <button className="remove-all-button" onClick={removeAllPokemon}>Remove All</button>
+      <button className="remove-all-button" onClick={removeAllPokemon}>
+        Remove All
+      </button>
+      <div className="pokemon-cards">
       {pokeDex.map((pokemon) => (
         <div key={pokemon.id}>
           <h2>{pokemon.name}</h2>
-          <img src={pokemon.sprites.other.dream_world.front_default} alt={pokemon.name}  style={{ width: "150px", height: "150px" }} />
+          <img
+            src={pokemon.sprites.other.dream_world.front_default}
+            alt={pokemon.name}
+            style={{ width: "150px", height: "150px" }}
+          />
           <button onClick={() => removePokemon(pokemon.id)}>Remove</button>
         </div>
       ))}
     </div>
+    </div>
+    
   );
 }
 

@@ -11,7 +11,13 @@ function PokeDex() {
  
   useEffect(() => {
     const keys = Object.keys(localStorage);
-    let pokemons = keys.map((key) => JSON.parse(localStorage.getItem(key)));
+    let pokemons = keys.map(key => {
+      let item = localStorage.getItem(key);
+      try {
+        return JSON.parse(item);
+      } catch (err) {
+      }
+    }).filter(Boolean); // filter out any undefined values
     setPokeDex(pokemons);
   }, []);
  

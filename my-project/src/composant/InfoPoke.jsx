@@ -4,7 +4,7 @@ const InfoPoke = ({ data }) => {
   if (!data) {
     return null;
   }
-  
+
   return (
     <div className="info" style={{ position: "sticky", top: "0" }}>
       <h1>{data.name}</h1>
@@ -27,7 +27,7 @@ const InfoPoke = ({ data }) => {
           </h3>
         ))}
       </div>
-      
+
     </div>
   );
 };
